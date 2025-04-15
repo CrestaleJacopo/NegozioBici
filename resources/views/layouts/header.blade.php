@@ -16,7 +16,7 @@
             <a href="{{ url('login') }}">Login</a> 
             <a href="{{ url('signup') }}">Sign up</a>
             
-            Benvenuto {{ Auth::user()->name }} ({{ Auth::user()->ruolo }}) --
+            {{-- Benvenuto {{ Auth::user()->name }} ({{ Auth::user()->ruolo }}) -- --}}
             Il ruolo non viene mostrato nè salvato correttamente  
             @if(session('utente.nome') != 'anonimo')
                 <a href="{{ url('esci') }}">Esci</a>
