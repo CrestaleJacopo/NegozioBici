@@ -21,24 +21,7 @@ class GoController extends Controller
     public function login()
     {
         return view('auth.login');
-    }
-
-    public function registraUtente(Request $request) {
-
-        // si potrebbe aggiungere la validazione con validator
-        try {
-            $user = User::create([
-                'name' => $request->input('nome'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
-                'ruolo' => $request->input('ruolo'),    //il ruolo non viene salvato
-            ]);
-            return redirect()->back()->with('success', 'Registrazione completata con successo!');
-
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Si è verificato un errore durante la registrazione. Riprova più tardi.');
-        }
-    }
+    }   
 
     public function controllaLogin(Request $request) {
         try {
@@ -64,6 +47,22 @@ class GoController extends Controller
             return redirect()->back()->with('error', 'Si è verificato un errore durante la registrazione. Riprova più tardi.');
         }
     }
+    public function registraUtente(Request $request) {
+        // si potrebbe aggiungere la validazione con validator.
+        // dd($request->input('ruolo'));
+        try {
+            $user = User::create([
+                'name' => $request->input('nome'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'ruolo' => $request->input('ruolo'),    //il ruolo non viene salvato
+            ]);
+            return redirect()->back()->with('success', 'Registrazione completata con successo!');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Si è verificato un errore durante la registrazione. Riprova più tardi.');
+        }
+    }
 
     public function signup()
     {
@@ -72,10 +71,10 @@ class GoController extends Controller
 
     public function logout()
     {
+        Auth::logout();
         return redirect()->route('home');
     }
 
-    // Pages
     public function faq()
     {
         return view('faq');

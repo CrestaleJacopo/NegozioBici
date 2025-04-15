@@ -16,12 +16,14 @@
             <a href="{{ url('login') }}">Login</a> 
             <a href="{{ url('signup') }}">Sign up</a>
             
-            {{-- Benvenuto {{ Auth::user()->name }} ({{ Auth::user()->ruolo }}) -- --}}
-            Il ruolo non viene mostrato nè salvato correttamente  
-            @if(session('utente.nome') != 'anonimo')
-                <a href="{{ url('esci') }}">Esci</a>
+            @if (Auth::check())
+                &nbsp; Benvenuto {{ Auth::user()->name }} ({{ Auth::user()->ruolo }}) &nbsp;
+                <a href="{{ url('logout') }}">Esci</a>
                 <a href="{{ url('elencoMieiOrdini') }}">Miei Ordini</a>
+            @else
+                Benvenuto ospite
             @endif
+            
         </p>
 
         <p>
